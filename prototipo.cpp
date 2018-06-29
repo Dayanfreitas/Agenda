@@ -64,10 +64,25 @@ void listaContato(Registro student[], int tamanho) {
     }
 }
 
+void procurarNome(Registro student[]){
+     int i;
+     char name[50];     
+     printf ("Informe o nome: ");
+     scanf ("%s", name);
+     for (i = 0; i <= 39; i++){
+         if (strcmp(name, student[i].nome) == 0){
+            printf ("Contatos\n");
+            printf("ID\tNome\tIdade\tTelefone\n");
+    	    printf("%d\t%s\t%d\t%s\n", i, student[i].nome, student[i].idade, student[i].telefone);            
+         }     
+     } 
+     system("pause");
+}
+
 void listarTodos(Registro student[]) {
     system("cls");
     int i;
-	//printf("Contatos %d\n", tamanho);
+	printf("Contatos\n");
 	printf("ID\tNome\tIdade\tTelefone\n");
 	for (i = 0; i < 40; i++){
         if (student[i].idade != 0){
@@ -82,9 +97,9 @@ void excluiContato(Registro student[],int posicao){
    
      student[posicao].idade = 0;
      
-     memset(&student[posicao].nome, 0,sizeof(student[posicao].nome));
+     memset(&student[posicao].nome, 0, sizeof(student[posicao].nome));
      
-     memset(&student[posicao].telefone, 0,sizeof(student[posicao].telefone));
+     memset(&student[posicao].telefone, 0, sizeof(student[posicao].telefone));
 
 }
 
@@ -117,9 +132,10 @@ int main (int argc, char*argv[]){
          system("cls");
          printf ("1-Criar contato: ");
          printf ("\n2-Procurar (por ID): ");
-         printf ("\n3-Excluir contato: ");
-         printf ("\n4-Editar contato: ");
-         printf ("\n5-Listar todos: ");
+         printf ("\n3-Procurar (por nome): ");
+         printf ("\n4-Excluir contato: ");
+         printf ("\n5-Editar contato: ");
+         printf ("\n6-Listar todos: ");
          printf ("\n0 - Sair");
          printf ("\nInforme a operação desejada: ");
          scanf ("%d", &escolha);
@@ -136,21 +152,24 @@ int main (int argc, char*argv[]){
 			   listaContato(alunos, id);
 			   break;
 		   case 3:
-   		       printf ("Informe seu iD: ");
-               scanf ("%d", &id); 
-			   excluiContato(alunos,id);
-			   tamanho--;
-			   break;
+   		       procurarNome(alunos);
+   		       break;
 		   case 4:
-               printf ("Informe seu iD: ");
-               scanf ("%d", &id); 
-			   editarContato(alunos, id);
-			   break;
+                printf ("Informe seu iD: ");
+                scanf ("%d", &id); 
+			    excluiContato(alunos,id);
+			    tamanho--;
+			    break;
 		   case 5:
+                printf ("Informe seu iD: ");
+                scanf ("%d", &id); 
+			    editarContato(alunos, id);
+			    break;
+           case 6: 
                 listarTodos(alunos);
                 break;
            default:
-			   puts("Opcao invalida!\n");
+			   puts("Finalizando...\n");
 			   break;
 	     }
       } while (escolha != 0);
